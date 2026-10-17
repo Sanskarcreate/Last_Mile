@@ -1,7 +1,20 @@
 .navbar {
     display: flex;
-    gap: 20px;
+    gap: 30px;
+    align-items: center;
+    font-family: monospace;
 }
+
+.navbar a {
+    color: sandybrown;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    color: white;
+}
+
 
 .header{
     display: flex;
@@ -10,5 +23,103 @@
 }
 
 .title{
-    align-content: center;
+    text-align: left;
+    color: sandybrown;
+}
+
+.intro-text{
+    text-align: center;
+}
+
+.play-button{
+    display: inline-block;
+    border: 50ap;
+    text-align: center;
+    color: white;
+    background-color: sandybrown;
+    border-radius: 15px;
+    font-size: x-large;
+    text-decoration: none;
+    padding: 15px 40px;
+    font-family: monospace;
+    font-weight: bold;
+    transition: 0.2ms;
+}
+
+.play-button:hover{
+    background-color: saddlebrown;
+    transform: scale(1.05);
+
+}
+
+.centre{
+    text-align: center;
+    font-family: monospace;
+    color: sandybrown;
+}
+
+.register{
+    text-align: center;
+    margin-top: 150px;
+    font-family: monospace;
+    color: sandybrown;
+}
+
+.register input{
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.register button{
+    padding: 15px 40px;
+    background-color: sandybrown;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    text-decoration: none;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.register button:hover{
+    background-color: saddlebrown;
+    color: white;
+}
+
+.login{
+    text-align: center;
+    font-family: monospace;
+    color: sandybrown;
+    margin-top: 150px;
+    background-color: #202c45;
+}
+
+.login input{
+    display: block;
+    margin: 15px auto;
+    padding: 10px;
+}
+
+.login button{
+    padding: 15px 40px;
+    background-color: sandybrown;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    text-decoration: none;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.login button:hover{
+    background-color: saddlebrown;
+    color: white;
+}
+
+canvas{
+    background-color: lightblue;
+    border: 2px solid black;
 }
