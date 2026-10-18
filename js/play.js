@@ -21,7 +21,7 @@ let playerX=100;
 let playerY=200;
 let isJumping=false;
 let velocityY=0;
-let gravity=0.5;
+let gravity=0.6;
 let groundY=300;
 let obstacleX=500;
 let obstacleX2=700;
@@ -43,6 +43,15 @@ let obstacle1Hit=false;
 let obstacle2Hit=false;
 let perfectText="";
 let perfectTimer=0;
+let lastTime=0;
+let deltaTime=1;
+let minimumGap=120;
+let MovingLeft=false;
+let MovingRight=false;
+let gameStarted=false;
+let playerHealth=3;
+
+
 
 function drawCity(){
     if (cityImage.complete && cityImage.naturalWidth > 0) {
@@ -56,10 +65,16 @@ function drawCity(){
 //drawing the player as well as all the assets such as the groubd abd obstacles.
 function drawPlayer() {
 
+      if(isSlowed && Math.floor(Date.now() / 150) % 2 === 0){
+        return;
+    }
+
+
     if (playerImage.complete && playerImage.naturalWidth > 0) {
         ctx.imageSmoothingEnabled = false;
         ctx.drawImage(playerImage, currentFrame * 128, 0, 32, 32, playerX, playerY + 50 - 100, 100, 110);
     }
+
 
     ctx.fillStyle = "black";
     ctx.font = "24px monospace";
@@ -98,10 +113,10 @@ function jump(){
 
 function checkCollision(){
     if (
-        playerX < obstacleX + 30 &&
-        playerX + 40 > obstacleX &&
+        playerX + 10 < obstacleX + 30 &&
+        playerX + 30 > obstacleX &&
         playerY < 310 + 40 &&
-        playerY + 50 > 310
+        playerY + 30 > 310
     ) {
     
         obstacle1Hit = true;
@@ -109,6 +124,7 @@ function checkCollision(){
         
     if (!isSlowed) {
         isSlowed = true;
+        playerHealth--;
         playerSpeed = 2;
 
         setTimeout(function(){
@@ -119,10 +135,10 @@ function checkCollision(){
     }
 
     if (
-        playerX < obstacleX2 + 30 &&
-        playerX + 40 > obstacleX2 &&
+        playerX + 12  < obstacleX2 +20 &&
+        playerX + 30 > obstacleX2 &&
         playerY < 310 + 40 &&
-        playerY + 50 > 310
+        playerY + 20 > 310
     ) {
 
         obstacle2Hit = true;
@@ -130,6 +146,7 @@ function checkCollision(){
 
         if (!isSlowed) {
             isSlowed = true;
+            playerHealth--;
             playerSpeed = 2;
 
             setTimeout(function(){
@@ -169,14 +186,36 @@ document.addEventListener("keyup", function(event){
 })
 
 // this is to make sure that the player is able to jump smoothly instead of telepoting to the pixels by assing velocity and gravity to the game.
-// also adding a animation frame which tells the game to run th eanimation again for when the player jumps the next time.
-function gameLoop() {
-    velocityY = velocityY + gravity;
-    playerY = playerY + velocityY;
-    frameCount = frameCount + 1;
-    isMoving= movingLeft || movingRight;
-    cityX-=citySpeed;
+// also adding a animation frame which tells the game to run the animation again for when the player jumps the next time.
+function gameLoop(timestamp) {
+
+if (lastTime ===0){
+    lastTime = timestamp;
+}
+
+deltaTime = Math.min((timestamp - lastTime)/(1000 / 60), 3);
+lastTime = timestamp;
+
+if(playerHealth <=0){
+    dreawGameOver();
+    requestAnimationFrame(gameLoop);
+    return;
+}
+
+if(!gameStarted){
+    drawStarterScreen();
+    requestAnimationFrame(gameLoop);
+    return;
+}
+
     
+
+    velocityY = velocityY + gravity * deltaTime;
+    playerY = playerY + velocityY * deltaTime;
+    frameCount = frameCount + 1;
+
+    isRunning=movingLeft || movingRight;
+
     if (cityX <= -800){
         cityX=0;
     }
@@ -188,15 +227,31 @@ function gameLoop() {
     }
 
     if (movingRight) {
-        playerX = playerX + playerSpeed;
+        playerX = playerX + playerSpeed * deltaTime;
     }
 
     if (movingLeft){
-        playerX = playerX - playerSpeed;
+        playerX = playerX - playerSpeed * deltaTime;
     }
 
-    obstacleX = obstacleX - obsticleSpeed;
-    obstacleX2 = obstacleX2 - obsticleSpeed;
+    if (playerX < 0){
+        playerX =0;
+    }
+
+    if(playerX > 600){
+        playerX = 600;
+    }
+
+    let speedMultiplier = isSlowed? 0.4 : 1;
+
+    if(isRunning){
+    obstacleX = obstacleX - obsticleSpeed * deltaTime;
+    obstacleX2 = obstacleX2 - obsticleSpeed * deltaTime;
+    cityX-=citySpeed * speedMultiplier * deltaTime;
+
+
+    }
+    
 
      if (obstacleX < -30) {
         if (obstacle1Hit === false){
@@ -206,7 +261,12 @@ function gameLoop() {
         } 
         
         obstacle1Hit = false;
-        obstacleX=800;
+        obstacleX=800 + Math.random() *300;
+
+        if (Math.abs(obstacleX - obstacleX2) < minimumGap){
+            obstacleX = Math.max(800, obstacleX2 + minimumGap);
+        }
+
     }
 
     if (obstacleX2 < -30){
@@ -217,7 +277,11 @@ function gameLoop() {
         }
         
         obstacle2Hit = false;
-        obstacleX2=800;
+        obstacleX2=800 + Math.random() * 300;
+
+        if(Math.abs(obstacleX2 - obstacleX) < minimumGap){
+            obstacleX2 = Math.max(800, obstacleX + minimumGap);
+        }
     }
 
     if (frameCount >= 60){
@@ -237,8 +301,8 @@ function gameLoop() {
         currentWorld = 2;
     }
 
-    if (isMoving){
-        animationCounter++;
+    if (isRunning){
+        animationCounter+= isSlowed ? deltaTime * 0.4 : deltaTime;
 
         if(animationCounter >= 8){
             currentFrame++;
@@ -263,11 +327,13 @@ function gameLoop() {
 
     drawPerfectPopup();
 
+    drawHealth();
+
     requestAnimationFrame(gameLoop);
 
 }
 
-gameLoop();
+requestAnimationFrame(gameLoop);
 
 function drawPerfectPopup(){
     if(perfectTimer > 0){
@@ -279,4 +345,61 @@ function drawPerfectPopup(){
 
         perfectTimer--;
     }
+}
+
+
+function drawStarterScreen(){
+    ctx.fillStyle="rgba(0, 0, 0.7)";
+    ctx.fillRect(0, 0, 800, 400);
+    ctx.fillStyle="White";
+    ctx.font="40px monospace";
+    ctx.textAlign="center";
+    ctx.fillText("LAST MILE", 400, 150);
+    ctx.font="20px monospace";
+    ctx.fillText("Press ENTER to Play", 400, 220);
+    ctx.textAlign="left"
+}
+
+document.addEventListener("keydown", function(event){
+    if(event.key==="Enter"){
+        gameStarted=true;
+    }
+
+    if(event.key.toLowerCase() === "r" && playerHealth <=0){
+        restartGame();
+    }
+})
+
+function drawHealth(){
+    ctx.fillStyle="red";
+    ctx.font="24px monospace";
+    ctx.fillText("❤️".repeat(Math.max(0, playerHealth)), 650, 30);
+}
+
+function dreawGameOver(){
+    ctx.fillStyle="rgba(0, 0, 0, 0.8)";
+    ctx.fillRect(0, 0,800, 400);
+    ctx.fillStyle="White";
+    ctx.textAlign="center";
+    ctx.font="40px monospace";
+    ctx.fillText("Game Over", 400, 150);
+    ctx.font="20px monospace";
+    ctx.fillText("Final Score: " + score, 400, 200);
+    ctx.fillText("Press R to Restart", 400, 250);
+    ctx.textAlign="left"; 
+}  
+
+function restartGame(){
+    playerHealth=3;
+    score=0;
+    currentWorld=1;
+    playerX=100;
+    playerY=groundY;
+    velocityY=0;
+    obstacleX=800;
+    obstacleX2=1100;
+    isSlowed=false;
+    playerSpeed = normalSpeed;
+    obstacle1Hit=false;
+    obstacle2Hit=false;
 }
