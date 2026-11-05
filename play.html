@@ -6,7 +6,7 @@
     <a href="index.html">
     <title>Last Mile</title>
     <link rel="stylesheet" href="style.css">
-    <script src="js/play.js" defer></script>
+    <script src="js/play.js" defer></script><!--this is here to link th eplay js to this play html page so that the game is playable in this page.-->
     <style> 
          body{
             background-color: #202c45;
@@ -17,6 +17,7 @@
 </head>
 <body>
 
+    <!--there is the same class here gain which is used to design the header and the nav bar which you can see from the class that is defined-->
 <header class="header">
 <h1 class="title">Last Mile</h1>
 
@@ -41,5 +42,13 @@ target="_blank">
 
 </header>
 </body>
-<canvas id="game" width="800" height="400"></canvas>
+<div class="How-To-Play"> <!--this here is a giud on how to play such as how to jump and move around.-->
+    <h2>HOW TO PLAY</h2>
+    <p>Press SPACE to jump over the obstacles. </p>
+    <p>Use A, D to move left and right.</p>
+    <p>Avoid obstacles to keep your hearts.</p>
+    <p>Earn points by performing perfect dodges and progressign thorugh all three worlds!</p>
+</div>
+
+<canvas id="game" width="800" height="400"></canvas><!--this here is for the canvas that the game is going to be played on.-->
 </html>

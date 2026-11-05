@@ -5,21 +5,26 @@
     <meta name="viewport" content="wwidth=device-width, intitial-scale=1.0">
     <title>Login - Last Mile</title>
     <link rel="stylesheet" href="style.css">
-    <script src="js/login.js" defer></script>
-</head>
-<style>
-    body{
-         background-color: #202c45;
-    }
+    <script src="js/login.js" defer></script> <!--this here is to link the login js file to this page as the loging page will not jst display but also activate whatever is written inside such as login information so that the user is able to login to the page..-->
+    <style> 
+         body{
+            background-color: #202c45;
+         }
+
+         
 </style>
+</head>
+
+<!--the class here is used to again design the layout of the page as well as the way that the page looks.-->
 <body>
     <div class="login">
         <h1>LAST MILE</h1>
         <h2 style="color: white;">Login</h2>
         <p style="color: white;">Welcome back, runner!!</p>
 
+        <!--this here the attribute novalidate is so that the form can check whether the text writtten inside the form i s corect.-->
         <form id="login-form" novalidate>
-            <input type="username" id="username" placeholder="Username">
+            <input type="username" id="username" placeholder="Username"> <!--this id as used to identify the -->
             <input type="password" id="password" placeholder="Password">
 
             <button type="button" id="login-button">Login</button>
@@ -27,7 +32,7 @@
             <p id="message"></p>
         </form>
 
-        <p>Don't have an account?</p>
+        <p>Don't have an account?</p><!--This section here is for people that do not have an acount so users can click on the register link to be able to make an account.-->
         <a href="register.html" style="color: sandybrown;">Register here</a>
 
     </div>

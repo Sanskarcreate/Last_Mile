@@ -4,9 +4,9 @@
     <meta charset ="UTF-8">
     <meta name="viewport" content="wwidth=device-width, intitial-scale=1.0">
     <a href="index.html">
-    <title>Last Mile</title>
+    <title>Last Mile - Leaderboard</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/webp" href="">
+    <script src="js/leaderboard.js" defer></script> <!--links teh leaderboard js to this page so that it displays whatever is within the leaderboad javascript file.-->
     <style> 
          body{
             background-color: #202c45;
@@ -14,12 +14,15 @@
 
          
 </style>
+
 </head>
 <body>
 
+<!--this is the same class fro header from the previous index file the reason this is here as well is becasue we want the same attributes to be apploed to all pages and not just one.-->
 <header class="header">
 <h1 class="title">Last Mile</h1>
 
+<!--this class is here so that it can be applied to all pages just like the index page.-->
 <nav class="navbar">
 <a href="play.html"
 title="Play The Game">
@@ -40,5 +43,32 @@ target="_blank">
 </nav>
 
 </header>
+
+<!--this section right here is to show the layout of how the leaderboard page will look, the attributes that are going to be in is also shown below with the rank, player name, and score.-->
+<section class="leaderboard-section">
+
+    <h1>LEADERBOARD</h1>
+    <p>Can You Make It To The Top???</p>
+
+    <div class="leaderboard-container">
+
+    <table class="leaderboard-table">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboardBody">
+            <tr>
+                <td colspan="3"> <!--this colspan is used to merge colums so since there is a colspan=3 then that means that there will be 3 columns which is evident from the leaderboard page.-->
+                    No scores recorded yet!!
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</section>
 </body>
 </html>

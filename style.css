@@ -1,37 +1,56 @@
-.navbar {
+.navbar { /* This is the class for the header for all pages which will now change the layout as well as the font size and the placemant of the text*/
     display: flex;
     gap: 30px;
     align-items: center;
     font-family: monospace;
+    position: absoloute;
+    left: 50%;
+    transform: translateX(-50%)
 }
 
-.navbar a {
+.navbar a { /* this section here is for the colour of the links and the font size as well as font weight */
     color: sandybrown;
     text-decoration: none;
     font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0;
+    position: relative;
 }
 
-.navbar a:hover {
+.navbar a:hover { /* this section for the navbar is so that when the user hovers over the links it will turn to a different colour to white which is implied by the colour being white underneath */
     color: white;
 }
 
 
-.header{
+.header{/* this section is from the class header which is applied to all pages which has the class header which is mainly used for  */
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    padding: 20px 40px;
+    background-color: "#18243b";
+    border-bottom: 1px solid #3d465a;
 }
 
-.title{
+.header a{ /* this section is for the header link so that the title does not have an underline underneath it since a link will usually have an underline beneath it. */
+    text-decoration: none;
+}
+
+.title{ /* the title for the paghes are usually in the left side whihc is Last Mile and this section undernath describes the design and the layout of the title. */
     text-align: left;
     color: sandybrown;
+    font-family: monospace;
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin: 0;
+    text-decoration: none;
 }
 
-.intro-text{
+.intro-text{ /* this is fro the intro text that is going to be displayed at the home page to show the user what the game s about */
     text-align: center;
 }
 
-.play-button{
+.play-button{ /* the play button class is to design the play button to make it look better with the colours and fonts and all the eye cathing designs. */
     display: inline-block;
     border: 50ap;
     text-align: center;
@@ -46,32 +65,47 @@
     transition: 0.2ms;
 }
 
-.play-button:hover{
+.play-button:hover{ /* the button hover is for when the user hovers their cursor over the play button it will turn a different colour to let the user know that the play button is being selected. */
     background-color: saddlebrown;
     transform: scale(1.05);
 
 }
 
-.centre{
+.centre{ /* The centre is so that the text can be alligned to the centre instead of it beung in the left all the time. */
     text-align: center;
     font-family: monospace;
     color: sandybrown;
+    background-color: #18243b;
+    padding: 10px;
+    margin:30px auto;
+    width: 70%;
+    border: 2px solid sandybrown;
+    text-align: center;
+    color: white;
 }
 
-.register{
+.centre h1{ /*this here is for heading 1 which is only to change the colour of the text.*/
+    color: sandybrown;
+}
+
+.centre p{/*this again is for the paragraph to change the colour.*/
+    color: #b7ab27fc
+}
+
+.register{ /* the register css is for the way the register page will look as we want the register pages to look like the theme of the website but with this it is just the text aligning to make ht etext inth emiddle of th epage which looks more better. */
     text-align: center;
     margin-top: 150px;
     font-family: monospace;
     color: sandybrown;
 }
 
-.register input{
+.register input{ /* this here is for th etext box as this is where you put the information in and this just shows the type of box there is going to be and there will be a block you can enter your information as well as the border around the block. */
     display: block;
     margin: 10px auto;
     padding: 10px;
 }
 
-.register button{
+.register button{ /* this here is the same with all th eother buttons this is just to chnage the buttons look and design. */
     padding: 15px 40px;
     background-color: sandybrown;
     border: none;
@@ -83,12 +117,12 @@
     font-size: larger;
 }
 
-.register button:hover{
+.register button:hover{ /*this here is also just like any other button hover this is just for the colour change it does when hovering over th ebutton.*/
     background-color: saddlebrown;
     color: white;
 }
 
-.login{
+.login{ /*this again here is for the login texts for the location of where in th epage the texts will be such as the akignment of the texts as well as the font and colour.*/
     text-align: center;
     font-family: monospace;
     color: sandybrown;
@@ -96,13 +130,13 @@
     background-color: #202c45;
 }
 
-.login input{
+.login input{ /*login imput class is for the area that the user inputs their information.*/
     display: block;
     margin: 15px auto;
     padding: 10px;
 }
 
-.login button{
+.login button{ /*the class for the login button that the user presses to log into their account.*/
     padding: 15px 40px;
     background-color: sandybrown;
     border: none;
@@ -114,12 +148,108 @@
     font-size: larger;
 }
 
-.login button:hover{
+.login button:hover{ /*again the login hover is like th register hover where whenthe user hover overs the login button*/
     background-color: saddlebrown;
     color: white;
 }
 
-canvas{
+canvas{/*the canvas class is used to actually display the game itslef in the play page.*/
     background-color: lightblue;
     border: 2px solid black;
+    display: block;
+    margin: 20px auto;
+}
+
+.leaderboard-section{/*this section is for the leacerboard which is the table and all the tect inside of thsi section*/
+    text-align: center;
+    font-family: monospace;
+    color: sandybrown;
+    margin: 80px auto;
+    padding: 20px;
+}
+
+.leaderboard-section h1{/*for the header which would be LEADERBOARD in the html file and this would be for the font size of how big the text needs to be.*/
+    font-size: 36px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.leaderboard-section p{ /*This one is for the paragraph that is written underneath the header and this is for the colour as well as the font size of th text that is written within.*/
+    color:white;
+    font-size: 16px;
+    margin-bottom: 35px;
+}
+
+.leaderboard-container{/*This is for the table itself sych as the colour fo the table. */
+    max-width: 800px;
+    margin: auto;
+    background-color: #18243b;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #3d465a;
+    overflow-x: auto;
+}
+
+.leaderboard-table{/*this is for the size of the table.*/
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard-table th{/*this hre is for the column names in the tables so the font zize as well as the colour fo the text.*/
+    color: sandybrown;
+    padding: 20px;
+    font-size: 18px;
+    border-bottom: 2px soplid sandybrown;
+}
+
+.leaderboard-table td{/*this class is for the 3 column that are made in the leaderbaord page. */
+    padding: 18px;
+    color: white;
+    font-size: 16px;
+    border-bottom: 1px solid #3d465a;
+}
+
+.leaderboard-table tbody tr:hover{/*this hover is for when you hover the cursor over the names of or score of all th eusers who have played and got a score to see so you just hover over and it will slightly turn a lighter colour.*/
+    background-color: #293954;
+    transition: background-color 0.3s ease;
+}
+
+.leaderboard-page{/*this is for the whole leaderboard page so this means the background colour*/
+    background-color: #202c45;
+    min-height: 100h;
+    margin: 0;
+}
+
+.How-To-Play { /*this is a how to play box to tell the user how to play the game and what controls to use and its to make the text inside a box.*/
+    background-color: #182946;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 30px auto;
+    width: 70%;
+    border: 2px solid sandybrown;
+    border-radius: 10px;
+}
+
+.How-To-Play h2{ /*to change the heading colour.*/
+    color: sandybrown;
+    font-family: monospace;
+}
+
+.How-To-Play p{ /*to change the paragraph colour to white.*/
+    color: rgb(255, 255, 255);
+    font-family: monospace
+}
+
+.worlds { /*this is for the three worlds so that it will look more cleaner by bein gin a line as well as a gap being in betweent the pictures.*/
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.worlds img{ /*this here is fro the heigh and width of the pictures to make htm a bit smaller so they fit in one like*/
+    width: 30%;
+    height: auto;
+    object-fit: cover;
 }
